@@ -20,22 +20,20 @@ class AddressView extends StatelessWidget {
             onPressed: () {
               Get.toNamed(AppRoute.addressadd);
             },
-            child: Icon(Icons.add)),
+            child: const Icon(Icons.add)),
         body: GetBuilder<AddressViewController>(
           builder: (controller) => HandlingDataView(
             statusRequest: controller.statusRequest,
-            widget: Container(
-              child: ListView.builder(
-                itemCount: controller.data.length,
-                itemBuilder: (context, i) {
-                  return CardAddress(
-                    addressModel: controller.data[i],
-                    onDelete: () {
-                      controller.deleteAddress(controller.data[i].sId!);
-                    },
-                  );
-                },
-              ),
+            widget: ListView.builder(
+              itemCount: controller.data.length,
+              itemBuilder: (context, i) {
+                return CardAddress(
+                  addressModel: controller.data[i],
+                  onDelete: () {
+                    controller.deleteAddress(controller.data[i].sId!);
+                  },
+                );
+              },
             ),
           ),
         ));
