@@ -17,7 +17,7 @@ class OrdersDetailsController extends GetxController {
   late StatusRequest statusRequest;
 
   late OrdersModel ordersModel;
-  Completer<GoogleMapController>? completercontroller;
+  late Completer<GoogleMapController> completercontroller;
   List<Marker> markers = [];
 
   double? lat;
@@ -26,6 +26,7 @@ class OrdersDetailsController extends GetxController {
 
   CameraPosition? cameraPosition;
   initialData() {
+    completercontroller = Completer<GoogleMapController>();
     if (ordersModel.ordersType == 0) {
       cameraPosition = CameraPosition(
         target: LatLng(ordersModel.addressLat!, ordersModel.addressLong!),
@@ -42,8 +43,6 @@ class OrdersDetailsController extends GetxController {
   void onInit() {
     ordersModel = Get.arguments['ordersmodel'];
     initialData();
-    completercontroller = Completer<GoogleMapController>();
-
     getData();
     super.onInit();
   }
