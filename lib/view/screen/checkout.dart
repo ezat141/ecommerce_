@@ -1,8 +1,8 @@
-
 import 'package:ecommerce/controller/checkout_controller.dart';
 import 'package:ecommerce/core/class/handlingdataview.dart';
 import 'package:ecommerce/core/constant/color.dart';
 import 'package:ecommerce/core/constant/image_asset.dart';
+import 'package:ecommerce/core/constant/routes.dart';
 import 'package:ecommerce/view/widget/checkout/carddeliveerytype.dart';
 import 'package:ecommerce/view/widget/checkout/cardpaymentmethod.dart';
 import 'package:ecommerce/view/widget/checkout/cardshippingaddress.dart';
@@ -79,7 +79,7 @@ class Checkout extends StatelessWidget {
                         children: [
                           InkWell(
                             onTap: () {
-                              controller.chooseDeliveryType(0);// 0 => Delivery
+                              controller.chooseDeliveryType(0); // 0 => Delivery
                             },
                             child: CardDeliveryTypeCheckout(
                                 imagename: AppImageAsset.deliveryImage2,
@@ -107,13 +107,33 @@ class Checkout extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              "Shipping Address",
-                              style: TextStyle(
-                                  color: AppColor.secondColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16),
-                            ),
+                            if (controller.dataaddress.isNotEmpty)
+                              const Text(
+                                "Shipping Address",
+                                style: TextStyle(
+                                    color: AppColor.secondColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16),
+                              ),
+                            if (controller.dataaddress.isEmpty)
+                              InkWell(
+                                onTap: () {
+                                  Get.toNamed(AppRoute.addressadd);
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.all(10),
+                                  child: const Center(
+                                    child: Text(
+                                      "Please Add Shipping Address \n Click Here",
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        color: AppColor.primaryColor,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             const SizedBox(height: 10),
                             ...List.generate(
                               controller.dataaddress.length,
@@ -128,8 +148,7 @@ class Checkout extends StatelessWidget {
                                     body:
                                         "${controller.dataaddress[index].addressCity} ${controller.dataaddress[index].addressStreet}",
                                     isactive: controller.addressid ==
-                                            controller
-                                                .dataaddress[index].sId
+                                            controller.dataaddress[index].sId
                                         ? true
                                         : false),
                               ),

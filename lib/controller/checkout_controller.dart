@@ -56,6 +56,8 @@ class CheckoutController extends GetxController {
       if (response['status'] == "success") {
         List listdata = response['data'];
         dataaddress.addAll(listdata.map((e) => AddressModel.fromJson(e)));
+        addressid = dataaddress[0].sId.toString();
+
       } else {
         statusRequest = StatusRequest.success;
       }
@@ -71,7 +73,9 @@ class CheckoutController extends GetxController {
     if (deliveryType == null) {
       return Get.snackbar("Error", "Please select a order Type");
     }
-
+    if (dataaddress.isEmpty) {
+      return Get.snackbar("Error", "Please select a shipping address");
+    }
     statusRequest = StatusRequest.loading;
 
     update();

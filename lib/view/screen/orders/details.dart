@@ -3,6 +3,7 @@ import 'package:ecommerce/core/class/handlingdataview.dart';
 import 'package:ecommerce/core/constant/color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class OrdersDetails extends StatelessWidget {
   const OrdersDetails({super.key});
@@ -78,7 +79,8 @@ class OrdersDetails extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Card(
+
+                  if (controller.ordersModel.ordersType == 0) Card(
                     child: Container(
                         child: ListTile(
                       title: const Text("Shipping Address",
@@ -88,6 +90,21 @@ class OrdersDetails extends StatelessWidget {
                       subtitle: Text(
                           "${controller.ordersModel.addressCity} ${controller.ordersModel.addressStreet}"),
                     )),
+                  ),
+                  if(controller.ordersModel.ordersType == 0) Card(
+                    child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        height: 300,
+                        width: double.infinity,
+                        child: GoogleMap(
+                        mapType: MapType.hybrid,
+                        markers: controller.markers.toSet(),
+                        initialCameraPosition: controller.cameraPosition!,
+                        onMapCreated: (GoogleMapController controllermap) {
+                          controller.completercontroller!
+                              .complete(controllermap);
+                        },
+                      ),),
                   ),
                 ])))),
       ),

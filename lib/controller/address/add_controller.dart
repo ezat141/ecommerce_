@@ -40,6 +40,7 @@ class AddAddressController extends GetxController {
       target: LatLng(postion!.latitude, postion!.longitude),
       zoom: 14.4746,
     );
+    addMarkers(LatLng(postion!.latitude, postion!.longitude));
     statusRequest = StatusRequest.none;
     update();
   }
