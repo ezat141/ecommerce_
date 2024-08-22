@@ -101,7 +101,7 @@ class OrdersDetails extends StatelessWidget {
                         markers: controller.markers.toSet(),
                         initialCameraPosition: controller.cameraPosition!,
                         onMapCreated: (GoogleMapController controllermap) {
-                          controller.completercontroller!
+                          controller.completercontroller
                               .complete(controllermap);
                         },
                       ),),

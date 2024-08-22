@@ -1,5 +1,5 @@
-
 import 'package:ecommerce/core/class/statusrequest.dart';
+import 'package:ecommerce/core/constant/routes.dart';
 import 'package:ecommerce/core/functions/handlingdatacontroller.dart';
 import 'package:ecommerce/core/services/services.dart';
 import 'package:ecommerce/data/datasource/remote/orders/pending_data.dart';
@@ -7,7 +7,6 @@ import 'package:ecommerce/data/model/ordersmodel.dart';
 import 'package:get/get.dart';
 
 class OrdersPendingController extends GetxController {
-  
   OrdersPendingData ordersPendingData = OrdersPendingData(Get.find());
 
   List<OrdersModel> data = [];
@@ -15,6 +14,18 @@ class OrdersPendingController extends GetxController {
   late StatusRequest statusRequest;
 
   MyServices myServices = Get.find();
+  gotopageTracking(OrdersModel listdata) {
+    Get.toNamed(AppRoute.orderstracking, arguments: {
+      "ordersmodel": listdata,
+    });
+  }
+
+  gotopageOrdersDetails(OrdersModel listdata) {
+    print("Navigating to details with order ID: ${listdata.ordersId}");
+    Get.toNamed(AppRoute.ordersdetails, arguments: {
+      "ordersmodel": listdata,
+    });
+  }
 
   String printOrderType(String val) {
     if (val == "0") {
@@ -39,12 +50,13 @@ class OrdersPendingController extends GetxController {
       return "The Order is being Prepared ";
     } else if (val == "2") {
       return "Ready To Picked up by Delivery man";
-    }  else if (val == "3") {
+    } else if (val == "3") {
       return "On The Way";
     } else {
       return "Archive";
     }
   }
+
   getOrders() async {
     data.clear();
     statusRequest = StatusRequest.loading;

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OrdersPending extends StatelessWidget {
-  const OrdersPending({Key? key}) : super(key: key);
+  const OrdersPending({super.key});
   @override
   Widget build(BuildContext context) {
     Get.put(OrdersPendingController());
@@ -24,3 +24,41 @@ class OrdersPending extends StatelessWidget {
         ));
   }
 }
+
+
+// import 'package:ecommerce/controller/orders/pending_controller.dart';
+// import 'package:ecommerce/core/class/handlingdataview.dart';
+// import 'package:ecommerce/view/widget/orders/orderslistcard.dart';
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+
+// class OrdersPending extends StatelessWidget {
+//   const OrdersPending({Key? key}) : super(key: key);
+
+//   @override
+//   Widget build(BuildContext context) {
+//     Get.put(OrdersPendingController());
+
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Orders'),
+//       ),
+//       body: Padding(
+//         padding: const EdgeInsets.all(10),
+//         child: GetBuilder<OrdersPendingController>(
+//           builder: (controller) {
+//             return HandlingDataView(
+//               statusRequest: controller.statusRequest,
+//               widget: ListView.builder(
+//                 itemCount: controller.data.length,
+//                 itemBuilder: (context, index) {
+//                   return CardOrdersList(order: controller.data[index]);
+//                 },
+//               ),
+//             );
+//           },
+//         ),
+//       ),
+//     );
+//   }
+// }
