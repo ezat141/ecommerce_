@@ -9,6 +9,7 @@ class CustomItemsCartList extends StatelessWidget {
   final String count;
   final void Function()? onAdd;
   final void Function()? onRemove;
+  final String imagename;
   const CustomItemsCartList({
     Key? key,
     required this.name,
@@ -16,6 +17,7 @@ class CustomItemsCartList extends StatelessWidget {
     required this.count,
     required this.onAdd,
     required this.onRemove,
+    required this.imagename,
   }) : super(key: key);
 
   @override
@@ -26,7 +28,8 @@ class CustomItemsCartList extends StatelessWidget {
           Expanded(
               flex: 2,
               child: CachedNetworkImage(
-                imageUrl: "https://res.cloudinary.com/dwcrlaw9a/image/upload/v1714354391/acrff6v6ajohkdrr3vue.png",
+                imageUrl:
+                    imagename,
                 height: 80,
               )),
           Expanded(
@@ -51,7 +54,8 @@ class CustomItemsCartList extends StatelessWidget {
                   )),
               Container(
                   height: 25,
-                  child: IconButton(onPressed: onRemove, icon: Icon(Icons.remove)))
+                  child:
+                      IconButton(onPressed: onRemove, icon: Icon(Icons.remove)))
             ],
           ))
         ]),

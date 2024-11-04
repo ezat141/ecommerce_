@@ -1,4 +1,3 @@
-
 import 'package:ecommerce/controller/cart_controller.dart';
 import 'package:ecommerce/core/class/handlingdataview.dart';
 import 'package:ecommerce/view/widget/cart/custom_bottom_navgationbar_cart.dart';
@@ -43,21 +42,23 @@ class Cart extends StatelessWidget {
                           ...List.generate(
                             cartController.data.length,
                             (index) => CustomItemsCartList(
-                                onAdd: () async {
-                                  await cartController
-                                      .add(cartController.data[index].product!.sId!);
-                                  cartController.refreshPage();
-                                },
-                                onRemove: () async {
-                                  await cartController.delete(
-                                      cartController.data[index].product!.sId!);
-                                  cartController.refreshPage();
-                                },
-                                name: "${cartController.data[index].product!.productName}",
-                                price:
-                                    "${cartController.data[index].productsprice} \$",
-                                count:
-                                    "${cartController.data[index].quantity}"),
+                              onAdd: () async {
+                                await cartController.add(
+                                    cartController.data[index].product!.sId!);
+                                cartController.refreshPage();
+                              },
+                              onRemove: () async {
+                                await cartController.delete(
+                                    cartController.data[index].product!.sId!);
+                                cartController.refreshPage();
+                              },
+                              name:
+                                  "${cartController.data[index].product!.productName}",
+                              price:
+                                  "${cartController.data[index].productsprice} \$",
+                              count: "${cartController.data[index].quantity}",
+                              imagename: "${cartController.data[index].product!.image}",
+                            ),
                           )
                         ],
                       ),
